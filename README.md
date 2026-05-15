@@ -1,42 +1,227 @@
-# SCRIPT SELETOR DE WALLPAPER USANDO AWWW E MPVPAPER
-Este pequeno script foi feito para utilização de wallpapers animados ou estáticos, sendo possível utilizar nos seguintes formatos abaixo:
+# Gerenciador de Wallpapers para Hyprland
 
---> Vídeos: .mp4
+Um script simples e eficiente para gerenciar wallpapers estáticos e animados no **Hyprland**, utilizando **Rofi** como menu visual interativo.
 
---> Imagens: .jpg, .jpeg, .png
+Compatível com imagens, GIFs e vídeos, com suporte a cache automático de miniaturas para melhorar o desempenho.
 
-O script foi desenvolvido utilizando Arch como distribuição Linux, e usando o Hyprland como interface, assim em outras distribuições e ambientes gráficos pode-se ocorrer falhas inesperadas.
+---
 
-Dependencias:
+# ✨ Funcionalidades
 
-Se estiver utilizando distros baseadas em Arch, tenha certeza de ter instalado os seguintes pacotes:
+- Seleção visual de wallpapers com **Rofi**
+- Suporte a wallpapers:
+  - Estáticos
+  - GIFs animados
+  - Vídeos
+- Sistema de cache de miniaturas
+- Aplicação rápida de wallpapers
+- Integração completa com o **Hyprland**
+- Compatível com Wayland
 
--->mpv
+---
 
--->mpvpaper
+# 📂 Formatos Suportados
 
--->swww ou awww
+## Imagens
 
-Se estiver usando Hyprland, certifique de deixar o awww-daemon ativado nas configurações, que podem ser encontradas geralmente em:
+- `.jpg`
+- `.jpeg`
+- `.png`
+- `.gif`
 
-cd ~/.config/hypr/
+## Vídeos
 
-Encontre o arquivo de configuração do hyprland, geralmente hyprland.conf e coloque na parte de AUTOSTART o seguinte comando:
+- `.mp4`
+- `.mkv`
+- `.webm`
 
+---
+
+# 📁 Estrutura de Diretórios
+
+Organize seus arquivos da seguinte forma dentro da pasta `~/Imagens`:
+
+```plaintext
+~/Imagens/
+├── Wallpapers/
+│   ├── wallpaper1.jpg
+│   ├── wallpaper2.png
+│   └── animado.gif
+│
+└── videos/
+    ├── video1.mp4
+    ├── anime.mkv
+    └── loop.webm
+```
+O script verifica automaticamente se as pastas principais existem e, caso não existam, elas serão criadas automaticamente na primeira execução.
+
+O script criará automaticamente:
+
+```plaintext
+~/.cache/wallpaper_thumbs
+~/.logs
+~/Imagens/Wallpapers
+~/Imagens/videos
+```
+
+Essas pastas serão utilizadas para:
+
+- Cache de miniaturas
+- Histórico de wallpapers utilizados
+
+---
+
+# 📦 Dependências
+
+Instale os seguintes pacotes:
+
+## Necessários
+
+- `mpv`
+- `mpvpaper`
+- `rofi`
+- `ffmpeg`
+- `imagemagick`
+- `swww` *(ou awww)*
+
+---
+
+# ⚙️ Configuração no Hyprland
+
+Adicione a seguinte linha ao arquivo:
+
+```plaintext
+~/.config/hypr/hyprland.conf
+```
+
+Caso utilize `swww`:
+
+```ini
+exec-once = swww-daemon
+```
+
+Caso utilize `awww`:
+
+```ini
 exec-once = awww-daemon
+```
 
-Depois salve o arquivo e saia para aplicar as alterações.
+---
 
-Funcionamento:
+# 🚀 Instalação
 
-Para utilizar o script da melhor forma recomenda-se colocar o script na pasta /usr/local/bin, utilize o comando abaixo para copiar ele ao diretorio, porém esteja dentro do local onde baixou o arquivo wallpaper.sh:
+## 1. Dar permissão de execução
 
-cp ./wallpaper.sh /usr/local/bin
+```bash
+chmod +x wallpaper.sh
+```
 
-Para saber como ele funciona so utilizar o script com a flag -h ou --help no terminal:
+## 2. Mover para o sistema
 
-wallpaper.sh --help
+```bash
+sudo cp ./wallpaper.sh /usr/local/bin/wallpaper
+```
 
-OBRIGADO
+Agora o comando `wallpaper` poderá ser executado em qualquer terminal.
 
-AUTOR: LUIS GUILHERME
+---
+
+# 🖼️ Uso
+
+## Abrir seletor de imagens
+
+```bash
+wallpaper
+```
+
+ou
+
+```bash
+wallpaper -m
+```
+
+---
+
+## Abrir seletor de vídeos
+
+```bash
+wallpaper -v
+```
+
+---
+
+## Aplicar wallpaper diretamente
+
+```bash
+wallpaper ~/Imagens/Wallpapers/wallpaper1.jpg
+```
+
+---
+
+## Exibir ajuda
+
+```bash
+wallpaper --help
+```
+
+---
+
+# ⌨️ Atalhos no Hyprland
+
+Adicione ao arquivo:
+
+```plaintext
+~/.config/hypr/hyprland.conf
+```
+
+## Exemplo
+
+```ini
+# Abrir seletor de imagens
+bind = $mainMod, W, exec, wallpaper -m
+
+# Abrir seletor de vídeos
+bind = $mainMod SHIFT, W, exec, wallpaper -v
+```
+
+---
+
+# 📌 Exemplos de Uso
+
+## Aplicando uma imagem
+
+```bash
+wallpaper ~/Imagens/Wallpapers/neon_city.png
+```
+
+---
+
+## Aplicando um GIF
+
+```bash
+wallpaper ~/Imagens/Wallpapers/animado.gif
+```
+
+---
+
+## Aplicando um vídeo
+
+```bash
+wallpaper ~/Imagens/videos/cyberpunk.mp4
+```
+
+---
+
+# 🛠️ Tecnologias Utilizadas
+
+- Hyprland
+- Rofi
+- mpv
+- FFmpeg
+- ImageMagick
+
+---
+
+# 👤 Autor: Luis Guilherme
+
+Script desenvolvido para uso pessoal e compartilhamento com a comunidade.
